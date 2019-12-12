@@ -1,16 +1,22 @@
-import React, {Component} from 'react';
-import {Switch, Route} from 'react-router-dom'
+import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom'
 import './App.css';
 import NavBar from './components/NavBar/NavBar'
 import SignupPage from './pages/SignupPage/SignupPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import MoviesIndexPage from './pages/MoviesIndexPage/MoviesIndexPage';
 import userService from './utils/userService';
+import AdminPage from './pages/AdminPage/AdminPage';
 
 class App extends Component {
 
   state = {
-    user: userService.getUser()
+    user: userService.getUser(),
+    movies: []
+  }
+
+  handleUpdateMovies = (movies) => {
+    this.setState({ movies })
   }
 
   handleSignupOrLogin = () => {
@@ -32,7 +38,7 @@ class App extends Component {
           />
         </header>
         <Switch>
-        <Route exact path='/signup' render={({ history }) =>
+          <Route exact path='/signup' render={({ history }) =>
             <SignupPage
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
@@ -44,11 +50,18 @@ class App extends Component {
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           } />
-          <Route exact path='/movies' render={({ history }) => 
-            <MoviesIndexPage
-            history={history}
+          <Route exact path='/admin' render={({ history }) =>
+            <AdminPage
+              history={history}
             />
-        } />
+          } />
+          <Route exact path='/movies' render={({ history }) =>
+            <MoviesIndexPage
+              history={history}
+              handleUpdateMovies={this.handleUpdateMovies}
+              movies={this.state.movies}
+            />
+          } />
         </Switch>
       </div>
     );
