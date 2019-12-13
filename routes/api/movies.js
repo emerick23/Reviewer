@@ -4,11 +4,13 @@ const moviesCtrl = require('../../controllers/movies');
 
 // Public Routes
 router.get('/', moviesCtrl.index)
-router.post('/', moviesCtrl.movieCreate)
+
 
 // Protected Routes
-// router.use(require('../../config/auth'))
-// router.post('/', checkAuth, moviesCtrl.movieCreate)
+router.use(require('../../config/auth'))
+router.post('/', checkAuth, moviesCtrl.movieCreate)
+router.put('/:id', moviesCtrl.movieEdit)
+router.delete('/:id', moviesCtrl.movieDelete)
 
 function checkAuth(req, res, next) {
     if (req.user) return next();

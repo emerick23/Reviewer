@@ -7,10 +7,29 @@ async function index(req, res) {
 
 async function movieCreate(req, res) {
     try {
-        console.log(req.body.movie)
-        const movie = new Movie(req.body.movie)
+        const movie = await new Movie(req.body.movie)
         movie.save()
-        res.json('Movie created sucessfully')
+        res.json(movie)
+    } catch (err) {
+        res.json({err})
+    }
+}
+
+async function movieEdit(req, res) {
+    try {
+        const movie = await Movie.findByIdAndUpdate(req.params.id, req.body.movie, {new: true})
+        movie.save()
+        res.json(movie)
+    } catch (err) {
+        res.json({err})
+    }
+}
+
+async function movieDelete(req, res) {
+    try {
+        const movie = await Movie.findByIdAndDelete(req.params.id)
+        movie.save()
+        res.json('Movie sucessfully deleted')
     } catch (err) {
         res.json({err})
     }
@@ -18,5 +37,7 @@ async function movieCreate(req, res) {
 
 module.exports = {
     index,
-    movieCreate
+    movieCreate,
+    movieEdit,
+    movieDelete
 }

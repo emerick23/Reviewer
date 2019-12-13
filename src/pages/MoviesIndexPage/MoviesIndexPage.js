@@ -1,26 +1,26 @@
 import React, { Component } from 'react'
 import movieService from '../../utils/movieService'
+import { Link } from 'react-router-dom'
 
-class MoviesIndexPage extends Component {
-
-    async componentDidMount() {
-        const movies = await movieService.moviesIndex()
-        this.props.handleUpdateMovies(movies)
-    }
-
-    render() {
-        let movies = this.props.movies.map( (movie, idx) => (
-            <div key={idx}>
-                <p>{movie.posterImg}</p>
-                <p>{movie.description}</p>
+const MoviesIndexPage = props => {
+    let movies = props.movies.map((movie, idx) => (
+        <Link to={{ pathname: `/movies/${idx}` }} key={idx}>
+            <div className='col s6 m4 l3'>
+                <div className='hoverable card small blue-grey lighten-4'>
+                    <div className='card-content'>
+                        <span className='card-title truncate'>{movie.name}</span>
+                    </div>
+                </div>
             </div>
-        ))
-        return (
-            <div>
+        </Link>
+    ))
+    return (
+        <div>
+            <div className='row'>
                 {movies}
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default MoviesIndexPage

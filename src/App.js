@@ -5,18 +5,27 @@ import NavBar from './components/NavBar/NavBar'
 import SignupPage from './pages/SignupPage/SignupPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import MoviesIndexPage from './pages/MoviesIndexPage/MoviesIndexPage';
-import userService from './utils/userService';
 import AdminPage from './pages/AdminPage/AdminPage';
+import MovieDetailPage from './pages/MovieDetailPage/MovieDetailPage';
+import userService from './utils/userService';
+import movieService from './utils/movieService'
 
 class App extends Component {
 
   state = {
     user: userService.getUser(),
-    movies: []
+    movies: null
   }
 
-  handleUpdateMovies = (movies) => {
+  async componentDidMount() {
+    console.log('app mounted')
+    const movies = await movieService.moviesIndex()
     this.setState({ movies })
+}
+
+  handleUpdateMovies = (updatedMovies) => {
+    this.setState({ movies: updatedMovies })
+    console.log('app movies updated')
   }
 
   handleSignupOrLogin = () => {
@@ -29,6 +38,9 @@ class App extends Component {
   }
 
   render() {
+    if (!this.state.movies) {
+      return <div>loading...</div>
+    }
     return (
       <div className="app">
         <header className="header">
@@ -53,6 +65,7 @@ class App extends Component {
           <Route exact path='/admin' render={({ history }) =>
             <AdminPage
               history={history}
+              handleUpdateMovies={this.handleUpdateMovies}
             />
           } />
           <Route exact path='/movies' render={({ history }) =>
@@ -60,6 +73,12 @@ class App extends Component {
               history={history}
               handleUpdateMovies={this.handleUpdateMovies}
               movies={this.state.movies}
+            />
+          } />
+          <Route exact path='/movies/:idx' render={(props) =>
+            <MovieDetailPage
+            {...props} 
+            movies={this.state.movies}
             />
           } />
         </Switch>

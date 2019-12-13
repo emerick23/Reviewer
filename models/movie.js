@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const movieSchema = new mongoose.Schema({
     posterImg: String,
+    name: String,
     description: String
 })
 
