@@ -28,6 +28,14 @@ class App extends Component {
     console.log('app movies updated')
   }
 
+  hanldeUpdateReviews = (movieIdx, updatedReviews) => {
+    let movie = this.state.movies[movieIdx]
+    movie.reviews = updatedReviews
+    let updatedMovies = [...this.state.movies]
+    updatedMovies.splice(movieIdx, 1, movie)
+    this.setState({ movies: updatedMovies})
+  }
+
   handleSignupOrLogin = () => {
     this.setState({ user: userService.getUser() });
   }
@@ -78,7 +86,9 @@ class App extends Component {
           <Route exact path='/movies/:idx' render={(props) =>
             <MovieDetailPage
             {...props} 
+            userId={this.state.user._id}
             movies={this.state.movies}
+            handleUpdateReviews={this.hanldeUpdateReviews}
             />
           } />
         </Switch>

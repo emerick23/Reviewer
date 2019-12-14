@@ -10,10 +10,6 @@ class MovieEditForm extends Component {
         description: this.props.editFormMovie.description
     }
 
-    componentDidMount() {
-        console.log('edit form mounted')
-    }
-
     handleChange = (event) => {
         this.setState({
             [event.currentTarget.name]: event.currentTarget.value
