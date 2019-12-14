@@ -21,7 +21,7 @@ class App extends Component {
     console.log('app mounted')
     const movies = await movieService.moviesIndex()
     this.setState({ movies })
-}
+  }
 
   handleUpdateMovies = (updatedMovies) => {
     this.setState({ movies: updatedMovies })
@@ -33,7 +33,7 @@ class App extends Component {
     movie.reviews = updatedReviews
     let updatedMovies = [...this.state.movies]
     updatedMovies.splice(movieIdx, 1, movie)
-    this.setState({ movies: updatedMovies})
+    this.setState({ movies: updatedMovies })
   }
 
   handleSignupOrLogin = () => {
@@ -83,13 +83,26 @@ class App extends Component {
               movies={this.state.movies}
             />
           } />
-          <Route exact path='/movies/:idx' render={(props) =>
-            <MovieDetailPage
-            {...props} 
-            userId={this.state.user._id}
-            movies={this.state.movies}
-            handleUpdateReviews={this.hanldeUpdateReviews}
-            />
+          <Route exact path='/movies/:idx' render={(props) => {
+            if (this.state.user === null) {
+              return (
+                <MovieDetailPage 
+                  {...props}
+                  userId=''
+                  movies={this.state.movies}
+                />
+              )
+            } else {
+              return (
+                <MovieDetailPage
+                  {...props}
+                  userId={this.state.user._id}
+                  movies={this.state.movies}
+                  handleUpdateReviews={this.hanldeUpdateReviews}
+                />
+              )
+            }
+          }
           } />
         </Switch>
       </div>
