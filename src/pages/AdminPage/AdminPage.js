@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import MovieCreateForm from '../../components/MovieCreateForm/MovieCreateForm'
 import movieService from '../../utils/movieService'
 import MovieEditForm from '../../components/MovieEditForm/MovieEditForm'
+import './AdminPage.css'
 
 class AdminPage extends Component {
 
@@ -73,13 +74,13 @@ class AdminPage extends Component {
         let createFormClassName = this.state.createForm ? 'row' : 'hide'
         let editFormClassName = this.state.editForm ? 'row' : 'hide'
         let movies = this.state.movies.map((movie, idx) => (
-            <li key={idx}><p>{movie.posterImg}, {movie.name}, {movie.description}</p><button onClick={() => this.handleEditForm(movie, idx)}>Edit Movie</button><button onClick={() => this.handleDeleteMovie(movie._id, idx)}>Delete Movie</button></li>
+            <li key={idx}><p>{movie.posterImg}, {movie.name}, {movie.description}</p><button className='btn' onClick={() => this.handleEditForm(movie, idx)}>Edit Movie</button><button className='btn' onClick={() => this.handleDeleteMovie(movie._id, idx)}>Delete Movie</button></li>
         ))
         if (!this.state.editFormMovie) {
             return (
                 <div>
                     <ul>{movies}</ul>
-                    <button name='addForm' onClick={this.handleCreateForm}>Add a Movie</button>
+                    <button className='btn' name='addForm' onClick={this.handleCreateForm}>Add a Movie</button>
                     <MovieCreateForm
                         {...this.props}
                         handleAddMovie={this.handleAddMovie}

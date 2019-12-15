@@ -14,7 +14,7 @@ const MoviesIndexPage = props => {
             <div className='col s6 m4 l3'>
                 <div className='hoverable card small blue-grey lighten-4'>
                     <div className='card-content'>
-                        <span className='card-title truncate'>{movie.name}{avgRatingArray[idx]}</span>
+                        <span className='card-title truncate'>{movie.name}{avgRatingArray[idx] ? avgRatingArray[idx] : 'No Reviews Yet'}</span>
                     </div>
                 </div>
             </div>

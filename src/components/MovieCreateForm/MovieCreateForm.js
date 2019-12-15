@@ -22,6 +22,10 @@ class MovieCreateForm extends Component {
         this.setState({posterImg: '', name: '', description: ''})
     }
 
+    isFormInvalid() {
+        return !(this.state.posterImg && this.state.name && this.state.description);
+      }
+
     render() {
         return (
             <div className={this.props.createFormClassName}>
@@ -44,7 +48,7 @@ class MovieCreateForm extends Component {
                             <label htmlFor='description'>Movie Description</label>
                         </div>
                     </div>
-                    <button className='btn' type='submit'>Submit</button>
+                    <button className='btn' disabled={this.isFormInvalid()} type='submit'>Submit</button>
                 </form>
             </div>
         )

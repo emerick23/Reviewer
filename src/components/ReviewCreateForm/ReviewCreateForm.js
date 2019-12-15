@@ -20,13 +20,17 @@ class ReviewCreateForm extends Component {
         this.props.handleAddReview(review)
     }
 
+    isFormInvalid() {
+        return !(this.state.rating && this.state.comment);
+      }
+
     render() {
         return (
             <div>
                 <form className='col s12' onSubmit={this.handleSubmit} autoComplete='off'>
                     <div className='row'>
                         <div className='input-field col s12'>
-                            <input id='rating' onChange={this.handleChange} type='number' name='rating' value={this.state.rating}></input>
+                            <input id='rating' onChange={this.handleChange} type='number' min='1' max='5' name='rating' value={this.state.rating}></input>
                             <label htmlFor='rating'>Movie Rating</label>
                         </div>
                     </div>
@@ -36,7 +40,7 @@ class ReviewCreateForm extends Component {
                             <label htmlFor='comment'>Movie Comment</label>
                         </div>
                     </div>
-                    <button className='btn' type='submit'>Submit</button>
+                    <button className='btn' disabled={this.isFormInvalid()} type='submit'>Submit</button>
                 </form>
             </div>
         )
