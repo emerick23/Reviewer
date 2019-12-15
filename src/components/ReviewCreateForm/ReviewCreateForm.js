@@ -16,7 +16,6 @@ class ReviewCreateForm extends Component {
 
     handleSubmit = async (event) => {
         event.preventDefault()
-        console.log(this.props.movieId, this.state)
         let review = await reviewService.reviewCreate(this.props.movieId, this.state)
         this.props.handleAddReview(review)
     }

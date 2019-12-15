@@ -53,7 +53,7 @@ class App extends Component {
       <div className="app">
         <header className="header">
           <NavBar
-            user={this.state.user}
+            user={this.state.user ? this.state.user : ''}
             handleLogout={this.handleLogout}
           />
         </header>
@@ -70,11 +70,16 @@ class App extends Component {
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           } />
-          <Route exact path='/admin' render={({ history }) =>
-            <AdminPage
-              history={history}
-              handleUpdateMovies={this.handleUpdateMovies}
-            />
+          <Route exact path='/admin' render={({ history }) => {
+            if (this.state.user !== null && this.state.user.isAdmin) {
+              return (
+                <AdminPage
+                  history={history}
+                  handleUpdateMovies={this.handleUpdateMovies}
+                />
+              )
+            }
+          }
           } />
           <Route exact path='/movies' render={({ history }) =>
             <MoviesIndexPage
@@ -83,27 +88,14 @@ class App extends Component {
               movies={this.state.movies}
             />
           } />
-          <Route exact path='/movies/:idx' render={(props) => {
-            if (this.state.user === null) {
-              return (
-                <MovieDetailPage 
-                  {...props}
-                  userId=''
-                  movies={this.state.movies}
-                />
-              )
-            } else {
-              return (
+          <Route exact path='/movies/:idx' render={(props) =>
                 <MovieDetailPage
                   {...props}
-                  userId={this.state.user._id}
+                  userId={this.state.user ? this.state.user._id : ''}
                   movies={this.state.movies}
                   handleUpdateReviews={this.hanldeUpdateReviews}
                 />
-              )
-            }
-          }
-          } />
+            } />
         </Switch>
       </div>
     );
