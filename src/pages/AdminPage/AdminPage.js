@@ -15,7 +15,6 @@ class AdminPage extends Component {
     }
 
     async componentDidMount() {
-        console.log('index mounted')
         let movies = await movieService.moviesIndex()
         this.setState({ movies })
     }
