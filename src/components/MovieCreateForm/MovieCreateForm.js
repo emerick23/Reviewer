@@ -33,7 +33,7 @@ class MovieCreateForm extends Component {
                     <div className='row'>
                         <div className='input-field col s12'>
                             <input id='posterImg' onChange={this.handleChange} type='text' name='posterImg' value={this.state.posterImg}></input>
-                            <label htmlFor='posterImg'>Poster Image</label>
+                            <label htmlFor='posterImg'>Image Url</label>
                         </div>
                     </div>
                     <div className='row'>
@@ -49,6 +49,7 @@ class MovieCreateForm extends Component {
                         </div>
                     </div>
                     <button className='btn' disabled={this.isFormInvalid()} type='submit'>Submit</button>
+                    <p className='btn btnMarg' onClick={this.props.handleCreateForm}>Cancel</p>
                 </form>
             </div>
         )

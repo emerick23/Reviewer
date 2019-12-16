@@ -4,6 +4,7 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar'
 import SignupPage from './pages/SignupPage/SignupPage'
 import LoginPage from './pages/LoginPage/LoginPage'
+import HomePage from './pages/HomePage/HomePage'
 import MoviesIndexPage from './pages/MoviesIndexPage/MoviesIndexPage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import MovieDetailPage from './pages/MovieDetailPage/MovieDetailPage';
@@ -89,13 +90,18 @@ class App extends Component {
             />
           } />
           <Route exact path='/movies/:idx' render={(props) =>
-                <MovieDetailPage
-                  {...props}
-                  userId={this.state.user ? this.state.user._id : ''}
-                  movies={this.state.movies}
-                  handleUpdateReviews={this.hanldeUpdateReviews}
-                />
-            } />
+            <MovieDetailPage
+              {...props}
+              userId={this.state.user ? this.state.user._id : ''}
+              movies={this.state.movies}
+              handleUpdateReviews={this.hanldeUpdateReviews}
+            />
+          } />
+          <Route exact path='/' render={(props) =>
+            <HomePage
+              {...props}
+            />
+          } />
         </Switch>
       </div>
     );

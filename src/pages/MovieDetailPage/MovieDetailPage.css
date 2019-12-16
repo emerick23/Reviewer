@@ -1,0 +1,11 @@
+.MovieDetailPage {
+    margin-top: 8vh;
+    padding-top: 2vh;
+    height: 92vh;
+}
+
+.reviewContainer {
+    background-color: #f6f6f5;
+    min-height: 50px;
+    margin-bottom: 10px;
+}

@@ -31,13 +31,13 @@ class ReviewCreateForm extends Component {
                     <div className='row'>
                         <div className='input-field col s12'>
                             <input id='rating' onChange={this.handleChange} type='number' min='1' max='5' name='rating' value={this.state.rating}></input>
-                            <label htmlFor='rating'>Movie Rating</label>
+                            <label htmlFor='rating'>Movie Rating (From 1 to 5 Stars)</label>
                         </div>
                     </div>
                     <div className='row'>
                         <div className='input-field col s12'>
                             <input id='comment' onChange={this.handleChange} type='text' name='comment' value={this.state.comment}></input>
-                            <label htmlFor='comment'>Movie Comment</label>
+                            <label htmlFor='comment'>Comment</label>
                         </div>
                     </div>
                     <button className='btn' disabled={this.isFormInvalid()} type='submit'>Submit</button>

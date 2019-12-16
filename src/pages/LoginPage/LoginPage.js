@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
+import './LoginPage.css'
 
 class LoginPage extends Component {
 
@@ -23,7 +24,7 @@ class LoginPage extends Component {
       // Let <App> know a user has signed up!
       this.props.handleSignupOrLogin();
       // Successfully signed up - show jobsIndex
-      this.props.history.push('/jobs');
+      this.props.history.push('/movies');
     } catch (err) {
       // Use a modal or toast in your apps instead of alert
       alert('Incorrect Credentials');

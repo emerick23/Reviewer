@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './MovieEditForm.css'
 import movieService from '../../utils/movieService'
 
 class MovieEditForm extends Component {
@@ -29,7 +28,7 @@ class MovieEditForm extends Component {
                     <div className='row'>
                         <div className='input-field col s12'>
                             <input id='posterImg' onChange={this.handleChange} type='text' name='posterImg' value={this.state.posterImg}></input>
-                            <label id='active' htmlFor='posterImg'>Poster Image</label>
+                            <label id='active' htmlFor='posterImg'>Image Url</label>
                         </div>
                     </div>
                     <div className='row'>
